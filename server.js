@@ -58,6 +58,11 @@ app.get("/login", function(request, response) {
 
 app.post("/login", function(request, response) {
   console.log("Button!");
+  var query = "SELECT * FROM User WHERE User.username = " + request.body.username + ";"
+  db.all(query, function(err, user) {
+    console.log("A");
+    console.log(user);
+  });
 });
 
 
@@ -66,9 +71,10 @@ app.post("/login", function(request, response) {
 // read the sqlite3 module docs and try to add your own! https://www.npmjs.com/package/sqlite3
 app.get("/register", function(request, response) {
   response.sendFile(__dirname + "/src/pages/register.html");
-  db.all("SELECT * from User", function(err, rows) {
-    response.send(JSON.stringify(rows));
-  });
+  //response.sendFile("/src/pages/register");
+  // db.all("SELECT * from User", function(err, rows) {
+  //   response.send(JSON.stringify(rows));
+  // });
 });
 
 
@@ -83,24 +89,6 @@ app.get('/saved-recipe', function(req, res) {
 
 	var lists = 'SELECT recipeName, recipeIngredients FROM SavedRecipe;'
 
-    // db.task('get-everything', task => {
-    //     return task.batch([
-    //         task.any(lists)
-    //     ]);
-    // })
-    //     .then(info => {
-    //         res.render('pages/saved-recipe',{
-    //             my_title: "Search Stash Page",
-    //             movies: info[0]
-    //         })
-    //     })
-    //     .catch(error => {
-    //         console.log('error', error);
-    //         res.render('pages/saved-recipe', {
-    //             my_title: "Search Stash Page",
-    //             movies:''
-    //         })
-    //     });
 });
 
 
@@ -108,22 +96,5 @@ app.get('/saved-list', function(req, res) {
 
 	var lists = 'SELECT listName, recipeNames, recipeIngredients FROM ShoppingList;'
   
-    // db.task('get-everything', task => {
-    //     return task.batch([
-    //         task.any(lists)
-    //     ]);
-    // })
-    //     .then(info => {
-    //         res.render('pages/saved-recipe',{
-    //             my_title: "Search Stash Page",
-    //             movies: info[0]
-    //         })
-    //     })
-    //     .catch(error => {
-    //         console.log('error', error);
-    //         res.render('pages/saved-recipe', {
-    //             my_title: "Search Stash Page",
-    //             movies:''
-    //         })
-    //     });
+  
 });

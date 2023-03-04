@@ -3,13 +3,38 @@
   <meta charset="UTF-8" />
   <title>Login</title>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="/login.css" />
   <link rel="stylesheet" href="/style.css" />
-  <link rel="stylesheet" href="/" />
-  <script src="../js/scripts.js"></script>
 
   <body>
-    <p>
-      This is a page.
-    </p>
+    <form action="/login" method="post">
+      <div class="imgcontainer">
+        <img src="https://cdn.glitch.global/252d0662-1202-4eb0-92db-5587412c6eeb/fotor_2023-3-4_15_22_52.png?v=1677968637872" alt="logo" style="width: 10%" />
+
+      </div>
+      <div class="container">
+        <label for="username"><b>Username</b></label><br />
+        <input
+          type="username"
+          id="username"
+          name="username"
+          placeholder="Username"
+          required
+        /><br /><br />
+
+        <label for="password"><b>Password</b></label><br />
+        <input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Password"
+          required
+        /><br /><br />
+
+        <button type="submit">Login</button><br /><br />
+
+        <a href="/register">No account? Register now!</a>
+      </div>
+    </form>
   </body>
 </html>
