@@ -64,25 +64,24 @@ var listener = app.listen(process.env.PORT, function() {
 
 app.get('/saved-recipe', function(req, res) {
 
-	var lists = 'select ;';
-
-//     db.task('get-everything', task => {
-//         return task.batch([
-//             task.any(movies)
-//         ]);
-//     })
-//         .then(info => {
-//             res.render('pages/searches',{
-//                 my_title: "Search Stash Page",
-//                 movies: info[0]
-//             })
-			
-//         })
-//         .catch(error => {
-//             console.log('error', error);
-//             res.render('pages/searches', {
-//                 my_title: "Search Stash Page",
-//                 movies:''
-//             })
-//         });
+	var lists = 'SELECT listName, recipeNames, recipeIngredients FROM ShoppingList;'
+  
+    db.task('get-everything', task => {
+        return task.batch([
+            task.any(lists)
+        ]);
+    })
+        .then(info => {
+            res.render('pages/saved-recipe',{
+                my_title: "Search Stash Page",
+                movies: info[0]
+            })
+        })
+        .catch(error => {
+            console.log('error', error);
+            res.render('pages/saved-recipe', {
+                my_title: "Search Stash Page",
+                movies:''
+            })
+        });
 });

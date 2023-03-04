@@ -1,23 +1,23 @@
 {
-  "name": "glitch-mvp-node",
+  "//1": "describes your app and its dependencies",
+  "//2": "https://docs.npmjs.com/files/package.json",
+  "//3": "updating this file will download and update your packages",
+  "name": "sprig",
   "version": "0.1.0",
-  "description": "A simple Node app built on fastify, instantly up and running.",
+  "description": "A recipe site with the user and the environment in mind.",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
   },
   "dependencies": {
-    "fastify": "^4.11.0",
-    "handlebars": "^4.7.7",
-    "@fastify/view": "^7.3.0",
-    "@fastify/static": "^6.6.0",
-    "@fastify/formbody": "^7.4.0"
+    "express": "^4.16.3",
+    "sqlite3": "^4.0.0"
   },
   "engines": {
-    "node": "14.x"
+    "node": "8.x"
   },
   "repository": {
-    "url": "https://glitch.com/edit/#!/glitch-mvp-node"
+    "url": "https://glitch.com/edit/#!/sprig"
   },
   "license": "MIT",
   "keywords": [
