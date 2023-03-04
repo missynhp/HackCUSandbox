@@ -23,21 +23,24 @@ var db = new sqlite3.Database(dbFile);
 // if ./.data/sqlite.db does not exist, create it, otherwise print records to console
 db.serialize(function() {
   if (!exists) {
-    db.run("CREATE TABLE Dreams (dream TEXT)");
-
+    db.run("CREATE TABLE IF NOT EXISTS User(userID INT NOT NULL PRIMARY KEY AUTO_INCREMENT, username TEXT NOT NULL, password TEXT NOT NULL, firstName TEXT, lastName TEXT, alcoholFree BOOLEAN DEFAULT false, dairyFree BOOLEAN DEFAULT false, fishFree BOOLEAN DEFAULT false, glutenFree BOOLEAN DEFAULT false, kosher BOOLEAN DEFAULT false, peanutFree BOOLEAN DEFAULT false, soyFree BOOLEAN DEFAULT false, treeNutFree BOOLEAN DEFAULT false, vegan BOOLEAN DEFAULT false, vegetarian BOOLEAN DEFAULT false)");
+    db.run("CREATE TABLE IF NOT EXISTS SavedRecipe(recipeID INT NOT NULL PRIMARY KEY AUTO_INCREMENT, recipeName TEXT NOT NULL, recipeIngredients JSON NOT NULL)");
+    db.run("CREATE TABLE IF NOT EXISTS User_SavedRecipe(userID INT NOT NULL PRIMARY KEY, recipeID INT NOT NULL PRIMARY KEY, CONSTRAINT FK_User_User_SavedRecipe FOREIGN KEY (userID) REFERENCES User(userID), CONSTRAINT FK_SavedRecipe_User_SavedRecipe FOREIGN KEY (recipeID) REFERENCES Recipe(recipeID))");
+    
     // insert default dreams
     db.serialize(function() {
       db.run(
-        'INSERT INTO Dreams (dream) VALUES ("Find and count some sheep"), ("Climb a really tall mountain"), ("Wash the dishes")'
+        'INSERT INTO User (username, password) VALUES ("Admin", "Admin")'
       );
     });
   } else {
-    console.log('Database "Dreams" ready to go!');
-    db.each("SELECT * from Dreams", function(err, row) {
-      if (row) {
-        console.log("record:", row);
-      }
-    });
+    console.log('Database already exists!');
+    db.run("DROP TABLE IF EXISTS User");
+    //db.each("SELECT * from User", function(err, row) {
+      //if (row) {
+        //console.log("record:", row);
+      //}
+    //});
   }
 });
 
@@ -61,27 +64,50 @@ var listener = app.listen(process.env.PORT, function() {
 });
 
 //Pull from DB for the saved recipe 
-
 app.get('/saved-recipe', function(req, res) {
+
+	var lists = 'SELECT recipeName, recipeIngredients FROM SavedRecipe;'
+
+    // db.task('get-everything', task => {
+    //     return task.batch([
+    //         task.any(lists)
+    //     ]);
+    // })
+    //     .then(info => {
+    //         res.render('pages/saved-recipe',{
+    //             my_title: "Search Stash Page",
+    //             movies: info[0]
+    //         })
+    //     })
+    //     .catch(error => {
+    //         console.log('error', error);
+    //         res.render('pages/saved-recipe', {
+    //             my_title: "Search Stash Page",
+    //             movies:''
+    //         })
+    //     });
+});
+
+app.get('/saved-list', function(req, res) {
 
 	var lists = 'SELECT listName, recipeNames, recipeIngredients FROM ShoppingList;'
   
-    db.task('get-everything', task => {
-        return task.batch([
-            task.any(lists)
-        ]);
-    })
-        .then(info => {
-            res.render('pages/saved-recipe',{
-                my_title: "Search Stash Page",
-                movies: info[0]
-            })
-        })
-        .catch(error => {
-            console.log('error', error);
-            res.render('pages/saved-recipe', {
-                my_title: "Search Stash Page",
-                movies:''
-            })
-        });
+    // db.task('get-everything', task => {
+    //     return task.batch([
+    //         task.any(lists)
+    //     ]);
+    // })
+    //     .then(info => {
+    //         res.render('pages/saved-recipe',{
+    //             my_title: "Search Stash Page",
+    //             movies: info[0]
+    //         })
+    //     })
+    //     .catch(error => {
+    //         console.log('error', error);
+    //         res.render('pages/saved-recipe', {
+    //             my_title: "Search Stash Page",
+    //             movies:''
+    //         })
+    //     });
 });
