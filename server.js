@@ -1,96 +1,62 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const mysql = require('mysql');
+// server.js
+// where your node app starts
 
-// express configuration
-const app = express();
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+// init project
+var express = require("express");
+var bodyParser = require("body-parser");
+var app = express();
+app.use(bodyParser.urlencoded({ extended: true }));
 
-// MySQL configuration
-var sql = mysql.createConnection({
-  host     : 'db',
-  user     : 'postgres',
-  password : process.env.MYSQLPASSWORD, //add to your .env file MYSQLPASSWORD=passwordHere 
-  database : 'project-db'
-});
+// we've started you off with Express,
+// but feel free to use whatever libs or frameworks you'd like through `package.json`.
 
-sql.connect();
+// http://expressjs.com/en/starter/static-files.html
+app.use(express.static("public"));
 
-// END OF COPYPASTED SHIT HERE
+// init sqlite db
+var fs = require("fs");
+var dbFile = "./.data/sqlite.db";
+var exists = fs.existsSync(dbFile);
+var sqlite3 = require("sqlite3").verbose();
+var db = new sqlite3.Database(dbFile);
 
-//var express = require('express'); 
-//var app = express();
-//var bodyParser = require('body-parser'); 
-app.use(bodyParser.json());             
-app.use(bodyParser.urlencoded({ extended: true })); 
+// if ./.data/sqlite.db does not exist, create it, otherwise print records to console
+db.serialize(function() {
+  if (!exists) {
+    db.run("CREATE TABLE Dreams (dream TEXT)");
+    console.log("New table Dreams created!");
 
-const fs = require("fs");
-const path = require("path");
-
-
-// Require the fastify framework and instantiate it
-const fastify = require("fastify")({
-  // set this to true for detailed logging:
-  logger: false,
-});
-
-// Setup our static files
-fastify.register(require("@fastify/static"), {
-  root: path.join(__dirname, "public"),
-  prefix: "/", // optional: default '/'
-});
-
-// fastify-formbody lets us parse incoming forms
-fastify.register(require("@fastify/formbody"));
-
-// point-of-view is a templating manager for fastify
-fastify.register(require("@fastify/view"), {
-  engine: {
-    handlebars: require("handlebars"),
-  },
-});
-
-
-// Our main GET home page route, pulls from src/pages/index.hbs
-fastify.get("/", function (request, reply) {
-  // request.query.paramName <-- a querystring example
-  return reply.view("src/pages/login.html");
-});
-
-
-fastify.get("/login", function (request, reply) {
-  // request.query.paramName <-- a querystring example
-  return reply.view("src/pages/login.html");
-});
-
-
-// Login POST route to authenticate a user.
-// fastify.post("/login", async function(request, reply) {
-//   const query = 'SELECT * FROM user WHERE user.username = $1;'
-//   db.any(query, [
-//     request.body.username,
-//   ])
-//   .then(async(user) => {
-//     console.log("A");
-//   })
-// });
-
-
-// fastify.
-
-
-
-// Run the server and report out to the logs
-fastify.listen(
-  { port: process.env.PORT, host: "0.0.0.0" },
-  function (err, address) {
-    if (err) {
-      console.error(err);
-      process.exit(1);
-    }
-    console.log(`Your app is listening on ${address}`);
+    // insert default dreams
+    db.serialize(function() {
+      db.run(
+        'INSERT INTO Dreams (dream) VALUES ("Find and count some sheep"), ("Climb a really tall mountain"), ("Wash the dishes")'
+      );
+    });
+  } else {
+    console.log('Database "Dreams" ready to go!');
+    db.each("SELECT * from Dreams", function(err, row) {
+      if (row) {
+        console.log("record:", row);
+      }
+    });
   }
-);
+});
 
+// http://expressjs.com/en/starter/basic-routing.html
+app.get("/", function(request, response) {
+  response.sendFile(__dirname + "/views/index.html");
+});
 
+// endpoint to get all the dreams in the database
+// currently this is the only endpoint, ie. adding dreams won't update the database
+// read the sqlite3 module docs and try to add your own! https://www.npmjs.com/package/sqlite3
+app.get("/getDreams", function(request, response) {
+  db.all("SELECT * from Dreams", function(err, rows) {
+    response.send(JSON.stringify(rows));
+  });
+});
+
+// listen for requests :)
+var listener = app.listen(process.env.PORT, function() {
+  console.log("Your app is listening on port " + listener.address().port);
+});

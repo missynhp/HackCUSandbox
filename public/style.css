@@ -12,13 +12,9 @@ html {
 
 /* adjust typography defaults */
 body {
-  background-image: url("");
+  background-image: url("https://cdn.glitch.global/252d0662-1202-4eb0-92db-5587412c6eeb/Blue%20Green%20Watercolor%20Linktree%20Background.png?v=1677965562425") !important;
   margin: 1rem;
   font-family: sans-serif;
   line-height: 1.5;
 }
 
-/* images and videos max out at full width */
-img,
-video {
-  hei !importantgh
