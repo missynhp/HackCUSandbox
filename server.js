@@ -24,7 +24,6 @@ var db = new sqlite3.Database(dbFile);
 db.serialize(function() {
   if (!exists) {
     db.run("CREATE TABLE Dreams (dream TEXT)");
-    console.log("New table Dreams created!");
 
     // insert default dreams
     db.serialize(function() {
@@ -44,7 +43,7 @@ db.serialize(function() {
 
 // http://expressjs.com/en/starter/basic-routing.html
 app.get("/", function(request, response) {
-  response.sendFile(__dirname + "/views/index.html");
+  response.sendFile(__dirname + "/src/pages/login.html");
 });
 
 // endpoint to get all the dreams in the database
@@ -59,4 +58,31 @@ app.get("/getDreams", function(request, response) {
 // listen for requests :)
 var listener = app.listen(process.env.PORT, function() {
   console.log("Your app is listening on port " + listener.address().port);
+});
+
+//Pull from DB for the saved recipe 
+
+app.get('/saved-recipe', function(req, res) {
+
+	var lists = 'select ;';
+
+//     db.task('get-everything', task => {
+//         return task.batch([
+//             task.any(movies)
+//         ]);
+//     })
+//         .then(info => {
+//             res.render('pages/searches',{
+//                 my_title: "Search Stash Page",
+//                 movies: info[0]
+//             })
+			
+//         })
+//         .catch(error => {
+//             console.log('error', error);
+//             res.render('pages/searches', {
+//                 my_title: "Search Stash Page",
+//                 movies:''
+//             })
+//         });
 });
