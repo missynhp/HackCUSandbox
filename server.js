@@ -29,7 +29,7 @@ fastify.get("/", function (request, reply) {
     greeting: "Hello Node!",
   };
   // request.query.paramName <-- a querystring example
-  return reply.view("/src/pages/index.hbs", params);
+  return reply.view("src/pages/login.html", params);
 });
 
 // A POST route to handle form submissions
@@ -38,7 +38,7 @@ fastify.post("/", function (request, reply) {
     greeting: "Hello Form!",
   };
   // request.body.paramName <-- a form post example
-  return reply.view("/src/pages/index.hbs", params);
+  return reply.view("src/pages/login.html", params);
 });
 
 // Run the server and report out to the logs
