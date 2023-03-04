@@ -30,22 +30,14 @@ fastify.register(require("@fastify/view"), {
 
 // Our main GET home page route, pulls from src/pages/index.hbs
 fastify.get("/", function (request, reply) {
-  // params is an object we'll pass to our handlebars template
-  let params = {
-    greeting: "Hello Node!",
-  };
   // request.query.paramName <-- a querystring example
-  return reply.view("src/pages/login.html", params);
+  return reply.view("src/pages/login.html");
 });
 
 
-// A POST route to handle form submissions
-fastify.post("/", function (request, reply) {
-  let params = {
-    greeting: "Hello Form!",
-  };
-  // request.body.paramName <-- a form post example
-  return reply.view("src/pages/login.html", params);
+fastify.get("/login", function (request, reply) {
+  // request.query.paramName <-- a querystring example
+  return reply.view("src/pages/login.html");
 });
 
 
@@ -56,9 +48,12 @@ fastify.post("/login", async function(request, reply) {
     request.body.username,
   ])
   .then(async(user) => {
-    
+    console.log("A");
   })
 });
+
+
+
 
 
 
