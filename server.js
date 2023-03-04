@@ -22,6 +22,8 @@ fastify.register(require("@fastify/view"), {
   },
 });
 
+
+
 // Our main GET home page route, pulls from src/pages/index.hbs
 fastify.get("/", function (request, reply) {
   // params is an object we'll pass to our handlebars template
@@ -32,6 +34,7 @@ fastify.get("/", function (request, reply) {
   return reply.view("src/pages/login.html", params);
 });
 
+
 // A POST route to handle form submissions
 fastify.post("/", function (request, reply) {
   let params = {
@@ -40,6 +43,20 @@ fastify.post("/", function (request, reply) {
   // request.body.paramName <-- a form post example
   return reply.view("src/pages/login.html", params);
 });
+
+
+// Login POST route to authenticate a user.
+fastify.post("/login", async function(request, reply) {
+  const query = 'SELECT * FROM user WHERE user.username = $1;'
+  db.any(query, [
+    request.body.username,
+  ])
+  .then(async(user) => {
+    
+  })
+});
+
+
 
 // Run the server and report out to the logs
 fastify.listen(

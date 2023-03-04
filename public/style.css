@@ -12,6 +12,7 @@ html {
 
 /* adjust typography defaults */
 body {
+  background-image: url("");
   margin: 1rem;
   font-family: sans-serif;
   line-height: 1.5;
