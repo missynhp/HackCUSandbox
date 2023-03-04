@@ -42,18 +42,18 @@ fastify.get("/login", function (request, reply) {
 
 
 // Login POST route to authenticate a user.
-fastify.post("/login", async function(request, reply) {
-  const query = 'SELECT * FROM user WHERE user.username = $1;'
-  db.any(query, [
-    request.body.username,
-  ])
-  .then(async(user) => {
-    console.log("A");
-  })
-});
+// fastify.post("/login", async function(request, reply) {
+//   const query = 'SELECT * FROM user WHERE user.username = $1;'
+//   db.any(query, [
+//     request.body.username,
+//   ])
+//   .then(async(user) => {
+//     console.log("A");
+//   })
+// });
 
 
-
+// fastify.
 
 
 
@@ -68,3 +68,6 @@ fastify.listen(
     console.log(`Your app is listening on ${address}`);
   }
 );
+
+
+//API 

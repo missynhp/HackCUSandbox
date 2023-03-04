@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS SavedRecipe
 (
   recipeID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
   recipeName VARCHAR(255) NOT NULL,
-  recipeIngredients JSON NOT NULL, 
+  recipeIngredients JSON NOT NULL
 );
 
 
