@@ -1,4 +1,14 @@
+
+var express = require('express'); 
+var app = express();
+var bodyParser = require('body-parser'); 
+app.use(bodyParser.json());             
+app.use(bodyParser.urlencoded({ extended: true })); 
+
+const fs = require("fs");
 const path = require("path");
+
+
 
 // Require the fastify framework and instantiate it
 const fastify = require("fastify")({
