@@ -43,10 +43,13 @@ CREATE TABLE IF NOT EXISTS User_SavedRecipe
 );
 
 
-CREATE TABLE IF NOT EXISTS ShoppingLists
+CREATE TABLE IF NOT EXISTS ShoppingList
 (
   listID INT PRIMARY KEY AUTO_INCREMENT,
   listName VARCHAR(255) FOREIGN KEY NOT NULL,
   recipeNames JSON NOT NULL,
-  recipeIngredients JSON NOT NULL
+  recipeIngredients JSON NOT NULL,
+  userID INT NOT NULL,
+  CONSTRAINT FK_User_ShoppingList
+    FOREIGNKEY (userID) REFERENCES User(userID)
 );

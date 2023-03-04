@@ -1,13 +1,32 @@
+const express = require('express');
+const bodyParser = require('body-parser');
+const mysql = require('mysql');
 
-var express = require('express'); 
-var app = express();
-var bodyParser = require('body-parser'); 
+// express configuration
+const app = express();
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+// MySQL configuration
+var sql = mysql.createConnection({
+  host     : 'db',
+  user     : 'postgres',
+  password : process.env.MYSQLPASSWORD, //add to your .env file MYSQLPASSWORD=passwordHere 
+  database : 'project-db'
+});
+
+sql.connect();
+
+// END OF COPYPASTED SHIT HERE
+
+//var express = require('express'); 
+//var app = express();
+//var bodyParser = require('body-parser'); 
 app.use(bodyParser.json());             
 app.use(bodyParser.urlencoded({ extended: true })); 
 
 const fs = require("fs");
 const path = require("path");
-
 
 
 // Require the fastify framework and instantiate it
@@ -31,11 +50,6 @@ fastify.register(require("@fastify/view"), {
     handlebars: require("handlebars"),
   },
 });
-
-
-
-
-
 
 
 // Our main GET home page route, pulls from src/pages/index.hbs
@@ -80,4 +94,3 @@ fastify.listen(
 );
 
 
-//API 
