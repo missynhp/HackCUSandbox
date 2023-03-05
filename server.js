@@ -138,6 +138,26 @@ app.get("/home", function (request, response) {
 });
 
 
+app.get("/list", function (request, response) {
+    response.sendFile(__dirname + "/src/pages/list.html");
+});
+
+
+app.get("/recipe", function (request, response) {
+    response.sendFile(__dirname + "/src/pages/recipe.html");
+});
+
+
+app.get("/search", function (request, response) {
+    response.sendFile(__dirname + "/src/pages/search.html");
+});
+
+
+app.get("/settings", function (request, response) {
+    response.sendFile(__dirname + "/src/pages/settings.html");
+});
+
+
 //Pull from DB for the saved recipe
 app.get("/saved-recipe", function (req, res) {
   var lists = "SELECT recipeName, recipeIngredients FROM SavedRecipe;";
@@ -147,11 +167,6 @@ app.get("/saved-recipe", function (req, res) {
 app.get("/saved-list", function (req, res) {
   var lists =
     "SELECT listName, recipeNames, recipeIngredients FROM ShoppingList;";
-});
-
-
-app.get("/search", function (request, response) {
-    response.sendFile(__dirname + "/src/pages/search.html");
 });
 
 

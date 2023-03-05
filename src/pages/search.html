@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html>
-<head>
-
+  <head>
     <title>Welcome to Sprig!</title>
 
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+    />
 
     <!-- jQuery library -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
@@ -16,128 +18,156 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 
     <style>
-        html {
-  box-sizing: border-box;
-  font-size: 16px;
-}
+      html {
+        box-sizing: border-box;
+        font-size: 16px;
+      }
 
-*, *:before, *:after {
-  box-sizing: inherit;
-}
+      *,
+      *:before,
+      *:after {
+        box-sizing: inherit;
+      }
 
-/* adjust typography defaults */
-body {
-  background-image: url("https://cdn.glitch.global/252d0662-1202-4eb0-92db-5587412c6eeb/Blue%20Green%20Watercolor%20Linktree%20Background.png?v=1677965562425") !important;
-  margin: 1rem;
-  font-family: impact;
-  line-height: 1.5;
-}
+      /* adjust typography defaults */
+      body {
+        background-image: url("https://cdn.glitch.global/252d0662-1202-4eb0-92db-5587412c6eeb/Blue%20Green%20Watercolor%20Linktree%20Background.png?v=1677965562425") !important;
+        margin: 1rem;
+        font-family: impact;
+        line-height: 1.5;
+      }
     </style>
-  
-</head>
-  
-  <nav class="navbar navbar-expand-lg" style="background-color:#04AA6D">
+  </head>
+
+  <nav class="navbar navbar-expand-lg" style="background-color: #04aa6d">
     <a class="navbar-brand" href="/home">
-        <img class="rounded-circle"
-             src="https://cdn.glitch.global/252d0662-1202-4eb0-92db-5587412c6eeb/fotor_2023-3-4_15_22_52.png?v=1677968637872" alt="logo"
-             alt=""
-             width="30"
-             height="30" />
+      <img
+        class="rounded-circle"
+        src="https://cdn.glitch.global/252d0662-1202-4eb0-92db-5587412c6eeb/fotor_2023-3-4_15_22_52.png?v=1677968637872"
+        alt="logo"
+        alt="Logo"
+        width="30"
+        height="30"
+      />
     </a>
-    <button class="navbar-toggler"
-            type="button"
-            data-toggle="collapse"
-            data-target="#navbarText"
-            aria-controls="navbarText"
-            aria-expanded="false"
-            aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbarText"
+      aria-controls="navbarText"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse courierFont" style="color:white;" id="navbarText">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="nav-link active" style="color:white;" href="/home">Home</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active" style="color:white;" href="/list">My Shopping Lists</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" style="color:white;" href="/recipe">My Recipes</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" style="color:white;" href="/search">Search for Recipes</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" style="color:white;" href="/settings">Settings</a>
-
-            </li>
-        </ul>
-        <div class="form-inline my-2 my-lg-0 ">
-            <a id="Logout" class="btn btn-outline-light" href="/">Logout</a>
-        </div>
+    <div
+      class="collapse navbar-collapse courierFont"
+      style="color: white"
+      id="navbarText"
+    >
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link active" style="color: white" href="/home">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" style="color: white" href="/list"
+            >My Shopping Lists</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" style="color: white" href="/recipe">My Recipes</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" style="color: white" href="/search"
+            >Search for Recipes</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" style="color: white" href="/settings">Settings</a>
+        </li>
+      </ul>
+      <div class="form-inline my-2 my-lg-0">
+        <a id="Logout" class="btn btn-outline-light" href="/">Logout</a>
+      </div>
     </div>
-</nav>
+  </nav>
 
-<body> 
-
-<div class="" >
-    <div class="container-fluid" style="padding: 2%">
-     
+  <body>
+    <div class="">
+      <div class="container-fluid" style="padding: 2%">
         <div class="row">
           <div class="col-3"></div>
           <div class="col-5">
             <input
               class="form-control"
-              style="color:rgb(91, 116, 230)"
+              style="color: rgb(91, 116, 230)"
               type="text"
-              name="city"
-              id= "city"
+              name="ingredient"
+              id="ingredient"
               placeholder="Enter an Ingredient"
             />
           </div>
           <div class="col-1">
-           
             <input
               class="btn btn-light"
-              style="background-color:#04AA6D; color:white"
-              type="submit"
+              style="background-color: #04aa6d; color: white"
+              type="button"
               name="Submit"
-              id="submit" 
-              onclick="loadData(document.getElementById('city').value);"
+              id="submit"
+              onclick="addIngredient(\"" + document.getElementById('ingredient').value + ");"
               value="Submit"
             />
-
           </div>
         </div>
-      
-    </div>
+      </div>
 
-    <div class="form-popup col-12" display="block" id="saveform">
-      <form class="form-container center" >
+      <div class="form-popup col-12" display="block" id="saveform">
+        <form class="form-container center">
           <div class="form-group">
-            <div class="col-form-12 center text-center" style="color:rgb(91, 116, 230)">
-            <div>Would you like to save this recipe?</div>
-            <form class="form-container center" action = "/searches/add" method="post">
-          <button type="submit"  class="btn-secondary" style="background-color:#04AA6D" onclick="sendData()">Yes</button> 
-        </form>
-           <button type="submit"  class="btn-secondary" style="background-color:#04AA6D" onclick="closeForm()">No</button> 
+            <div
+              class="col-form-12 center text-center"
+              style="color: rgb(91, 116, 230)"
+            >
+              <div>Would you like to save this recipe?</div>
+              <form
+                class="form-container center"
+                action="/searches/add"
+                method="post"
+              >
+                <button
+                  type="submit"
+                  id="saveRecipe"
+                  class="btn-secondary"
+                  style="background-color: #04aa6d"
+                  onclick="sendData()"
+                >
+                  Yes
+                </button>
+              </form>
+              <button
+                type="submit"
+                class="btn-secondary"
+                style="background-color: #04aa6d"
+                onclick="closeForm()"
+              >
+                No
+              </button>
+            </div>
           </div>
-        </div>
-      </form>
-  </div>
+        </form>
+      </div>
 
-    <div class = "col-4" style="color:rgb(91, 116, 230)">
+      <div class="col-4" style="color: rgb(91, 116, 230)">
         <div id="display">
-            <h6 id="foodId"></h6>
-            <p id="quantity"></p>
-            <p id="measure"></p>
-            <p id="weight"></p> 
-            <a id="food" ></a>
-            <a id="foodCategory" ></a>
-        
-           
+          <h6 id="foodId"></h6>
+          <p id="quantity"></p>
+          <p id="measure"></p>
+          <p id="weight"></p>
+          <a id="food"></a>
+          <a id="foodCategory"></a>
         </div>
-  </div>
-</div>
-</body>
-
+      </div>
+    </div>
+  </body>
+</html>
