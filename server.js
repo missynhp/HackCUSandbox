@@ -83,9 +83,7 @@ app.post("/login", function (request, response) {
   db.serialize(function () {
     db.each(query, function (err, user) {
       
-      console.log(user)
       const passwordInput = user.password;
-      console.log(passwordInput)
       
       if (user == undefined) {
         console.log("User Not Found");
@@ -103,12 +101,13 @@ app.post("/login", function (request, response) {
   });
 });
 
+
 app.get("/register", function (request, response) {
   response.sendFile(__dirname + "/src/pages/register.html");
   //response.sendFile("/src/pages/register");
-  // db.all("SELECT * from User", function(err, rows) {
-  //   response.send(JSON.stringify(rows));
-  // });
+  //db.all("SELECT * from User", function(err, rows) {
+  //  response.send(JSON.stringify(rows));
+  //});
 });
 
 app.post("/register", function (request, response) {
@@ -125,9 +124,7 @@ app.post("/register", function (request, response) {
   if (password1 == password2) {
     db.all(query, function (err, user) {
       console.log("New User Registered!");
-      console.log(user);
-      // console.log(err);
-      response.sendFile(__dirname + "/src/pages/login.html");
+      response.sendFile(__dirname + "/src/pages/home.html");
     });
   } else {
     console.log("Passwords Don't Match");
@@ -135,24 +132,31 @@ app.post("/register", function (request, response) {
   }
 });
 
+
 app.get("/home", function (request, response) {
   response.sendFile(__dirname + "/src/pages/home.html");
 });
 
-// listen for requests :)
-var listener = app.listen(process.env.PORT, function () {
-  console.log("Your app is listening on port " + listener.address().port);
-});
 
 //Pull from DB for the saved recipe
 app.get("/saved-recipe", function (req, res) {
   var lists = "SELECT recipeName, recipeIngredients FROM SavedRecipe;";
 });
 
+
 app.get("/saved-list", function (req, res) {
   var lists =
     "SELECT listName, recipeNames, recipeIngredients FROM ShoppingList;";
 });
+
+
 app.get("/search", function (request, response) {
     response.sendFile(__dirname + "/src/pages/search.html");
+});
+
+
+
+// listen for requests :)
+var listener = app.listen(process.env.PORT, function () {
+  console.log("Your app is listening on port " + listener.address().port);
 });
