@@ -18,24 +18,24 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 
     <style>
-      html {c
-crr i p t s    box-sizing: border-box;
-        font-size: 16px;
-      }
+            html {c
+      crr i p t s    box-sizing: border-box;
+              font-size: 16px;
+            }
 
-      *,
-      *:before,
-      *:after {
-        box-sizing: inherit;
-      }
+            *,
+            *:before,
+            *:after {
+              box-sizing: inherit;
+            }
 
-      /* adjust typography defaults */
-      body {
-        background-image: url("https://cdn.glitch.global/252d0662-1202-4eb0-92db-5587412c6eeb/Blue%20Green%20Watercolor%20Linktree%20Background.png?v=1677965562425") !important;
-        margin: 1rem;
-        font-family: impact;
-        line-height: 1.5;
-      }
+            /* adjust typography defaults */
+            body {
+              background-image: url("https://cdn.glitch.global/252d0662-1202-4eb0-92db-5587412c6eeb/Blue%20Green%20Watercolor%20Linktree%20Background.png?v=1677965562425") !important;
+              margin: 1rem;
+              font-family: impact;
+              line-height: 1.5;
+            }
     </style>
   </head>
 
@@ -75,7 +75,9 @@ crr i p t s    box-sizing: border-box;
           >
         </li>
         <li class="nav-item">
-          <a class="nav-link" style="color: white" href="/saved-recipe">My Recipes</a>
+          <a class="nav-link" style="color: white" href="/saved-recipe"
+            >My Recipes</a
+          >
         </li>
         <li class="nav-item">
           <a class="nav-link" style="color: white" href="/search"
@@ -96,7 +98,19 @@ crr i p t s    box-sizing: border-box;
     <div class="">
       <div class="container-fluid" style="padding: 2%">
         <div class="row">
-          <div class="col-3"></div>
+          <div class="col-3">
+            <label for="dropdown">Choose a CO2 Emission Rating minimum:</label>
+
+            <select name="dropdown" id="dropdown">
+              <option value="A+">A+</option>
+              <option value="A">A</option>
+              <option value="B">B</option>
+              <option value="C">C</option>
+              <option value="D">D</option>
+              <option value="F">F</option>
+              <option value="G">G</option>
+            </select>
+          </div>
           <div class="col-5">
             <input
               class="form-control"

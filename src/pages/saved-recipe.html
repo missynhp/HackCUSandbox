@@ -36,6 +36,10 @@
         font-family: impact;
         line-height: 1.5;
       }
+      
+      card {
+        transform: translateY(50%);
+      }
     </style>
   </head>
 
@@ -92,7 +96,7 @@
     </div>
   </nav>
 
-  <body>
+  <body -ms-transform="translateY(-50%)" transform="translateY(50%)">
     
     <div class="card-deck">
       <div class="card">
@@ -120,11 +124,11 @@
       <div class="card">
         <img class="card-img-top" src="..." alt="3rd Recipe Image">
         <div class="card-body">
-          <h5 class="card-title">1st Recipe Title</h5>
-          <p class="card-text">1st Recipe Description</p>
+          <h5 class="card-title">3rd Recipe Title</h5>
+          <p class="card-text">3rd Recipe Description</p>
         </div>
         <div class="card-footer">
-          <small class="text-muted">1st Recipe Dietary Restrictions</small>
+          <small class="text-muted">3rd Recipe Dietary Restrictions</small>
         </div>
       </div>
     </div>
