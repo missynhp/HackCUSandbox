@@ -12,9 +12,28 @@ html {
 
 /* adjust typography defaults */
 body {
+  height: 99vh;
+	text-align:center;
   background-image: url("https://cdn.glitch.global/252d0662-1202-4eb0-92db-5587412c6eeb/Blue%20Green%20Watercolor%20Linktree%20Background.png?v=1677965562425") !important;
   margin: 1rem;
   font-family: sans-serif;
   line-height: 1.5;
 }
 
+button {	
+  background-color: #04AA6D;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 10%
+}
+input[type=username], input[type=password] , input[type=email] {
+  width: 50%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}

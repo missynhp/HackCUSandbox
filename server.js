@@ -57,24 +57,36 @@ app.get("/login", function(request, response) {
 });
 
 app.post("/login", function(request, response) {
-  console.log("Button!");
-  var query = "SELECT * FROM User WHERE User.username = " + request.body.username + ";"
+  const username = request.body.username;
+  const query = "SELECT * FROM User WHERE User.username = " + username + ";"
+  
   db.all(query, function(err, user) {
-    console.log("A");
-    console.log(user);
+    if(user == undefined){
+      console.log("User Not Found");
+      response.sendFile(__dirname + "/src/pages/login.html");
+      
+    } else if (user.password == request.body.password) {
+      console.log("Login Successful!");
+      response.sendFile(__dirname + "/src/pages/home.html");
+      
+    } else {
+      console.log("Incorrect Password");
+      response.sendFile(__dirname + "/src/pages/login.html");
+    }
   });
 });
 
 
-// endpoint to get all the dreams in the database
-// currently this is the only endpoint, ie. adding dreams won't update the database
-// read the sqlite3 module docs and try to add your own! https://www.npmjs.com/package/sqlite3
 app.get("/register", function(request, response) {
   response.sendFile(__dirname + "/src/pages/register.html");
   //response.sendFile("/src/pages/register");
   // db.all("SELECT * from User", function(err, rows) {
   //   response.send(JSON.stringify(rows));
   // });
+});
+
+app.post("/register", function(request, response) {
+  
 });
 
 

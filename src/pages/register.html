@@ -8,8 +8,9 @@
 
   <body>
     <form action="/register" method="post">
+    
       <div class="imgcontainer">
-        <img src="nextpagelogo.png" alt="logo" style="width: 10%" />
+        <img src="https://cdn.glitch.global/252d0662-1202-4eb0-92db-5587412c6eeb/fotor_2023-3-4_15_22_52.png?v=1677968637872" alt="logo" style="width: 10%" />
       </div>
       <div class="container">
         <label for="username"><b>Username</b></label><br />
@@ -21,16 +22,34 @@
           required
         /><br /><br />
 
-        <label for="password"><b>Password</b></label><br />
+        <label for="email"><b>Email</b></label><br />
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="Email"
+          required
+        /><br /><br />
+        
+         <label for="password"><b>Re-enter Password</b></label><br />
         <input
           type="password"
-          id="password"
+          id="password1"
           name="password"
           placeholder="Password"
           required
         /><br /><br />
 
-        <button type="submit">Login</button><br /><br />
+        <label for="password"><b>Re-enter Password</b></label><br />
+        <input
+          type="password"
+          id="password2"
+          name="password2"
+          placeholder="Verify Password"
+          required
+        /><br /><br />
+
+        <button href= "/home">Register</button><br /><br />
       </div>
     </form>
   </body>
