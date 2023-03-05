@@ -59,7 +59,8 @@ app.get("/login", function(request, response) {
 app.post("/login", function(request, response) {
   const username = request.body.username;
   const password = request.body.password;
-  const query = "SELECT * FROM User WHERE User.username = " + username + ";"
+  const query = "SELECT * FROM User WHERE User.username = " + username
+  console.log(query);
   
   db.all(query, function(err, user) {
     if (user == undefined) {
@@ -90,15 +91,23 @@ app.post("/register", function(request, response) {
   const username = request.body.username;
   const password1 = request.body.password1;
   const password2 = request.body.password2;
-  const query = "INSERT INTO User (username, password) VALUES (" + username + ", " + password1 + ");"
+  const query = "INSERT INTO User (username, password) VALUES (" + username + ", " + password1 + ")"
   
   if (password1 == password2) {
-    
+    db.all(query, function(err, user) {
+      console.log("New User Registered!");
+      response.sendFile(__dirname + "/src/pages/home.html");
+    });
     
   } else {
     console.log("Passwords Don't Match");
     response.sendFile(__dirname + "/src/pages/register.html");
   }
+});
+
+
+app.get("/home", function(request, response) {
+  response.sendFile(__dirname + "/src/pages/home.html");
 });
 
 
