@@ -25,24 +25,24 @@ db.serialize(function() {
   if (!exists) {
     console.log("Table Creation");
     db.run("CREATE TABLE IF NOT EXISTS User(userID INT NOT NULL PRIMARY KEY AUTO_INCREMENT, username TEXT NOT NULL, password TEXT NOT NULL, firstName TEXT, lastName TEXT, alcoholFree BOOLEAN DEFAULT false, dairyFree BOOLEAN DEFAULT false, fishFree BOOLEAN DEFAULT false, glutenFree BOOLEAN DEFAULT false, kosher BOOLEAN DEFAULT false, peanutFree BOOLEAN DEFAULT false, soyFree BOOLEAN DEFAULT false, treeNutFree BOOLEAN DEFAULT false, vegan BOOLEAN DEFAULT false, vegetarian BOOLEAN DEFAULT false)");
-    db.run("CREATE TABLE IF NOT EXISTS SavedRecipe(recipeID INT NOT NULL PRIMARY KEY AUTO_INCREMENT, recipeName TEXT NOT NULL, recipeIngredients JSON NOT NULL)");
-    db.run("CREATE TABLE IF NOT EXISTS User_SavedRecipe(userID INT NOT NULL PRIMARY KEY, recipeID INT NOT NULL PRIMARY KEY, CONSTRAINT FK_User_User_SavedRecipe FOREIGN KEY (userID) REFERENCES User(userID), CONSTRAINT FK_SavedRecipe_User_SavedRecipe FOREIGN KEY (recipeID) REFERENCES Recipe(recipeID))");
+    db.run("CREATE TABLE IF NOT EXISTS SavedRecipe(recipeID INT NOT NULL PRIMARY KEY AUTO_INCREMENT, recipeName TEXT NOT NULL, recipeIngredients JSON NOT NULL);");
+    db.run("CREATE TABLE IF NOT EXISTS User_SavedRecipe(userID INT NOT NULL PRIMARY KEY, recipeID INT NOT NULL PRIMARY KEY, CONSTRAINT FK_User_User_SavedRecipe FOREIGN KEY (userID) REFERENCES User(userID), CONSTRAINT FK_SavedRecipe_User_SavedRecipe FOREIGN KEY (recipeID) REFERENCES Recipe(recipeID));");
     
     // insert default dreams
     db.serialize(function() {
       console.log("Table Insert");
       db.run(
-        'INSERT INTO User (username, password) VALUES ("Admin", "Admin")'
+        "INSERT INTO User (username, password) VALUES ('Admin', 'Admin');"
       );
     });
   } else {
     console.log('Database already exists!');
-    //db.run("DROP TABLE IF EXISTS User");
-    db.each("SELECT * from User", function(err, row) {
-      if (row) {
-        console.log("record:", row);
-      }
-    });
+    db.run("DROP TABLE IF EXISTS User");
+    //db.each("SELECT * from User", function(err, row) {
+      //if (row) {
+        //console.log("record:", row);
+      //}
+    //});
   }
 });
 
@@ -59,12 +59,12 @@ app.get("/login", function(request, response) {
 app.post("/login", function(request, response) {
   const username = request.body.username;
   const password = request.body.password;
-  const query = "SELECT * FROM User WHERE User.username = " + username
-  console.log(query);
+  const query = "SELECT * FROM User WHERE User.username = " + username + ";"
   
   db.all(query, function(err, user) {
     if (user == undefined) {
       console.log("User Not Found");
+      console.log(err);
       response.sendFile(__dirname + "/src/pages/login.html");
       
     } else if (user.password == password) {
@@ -91,12 +91,12 @@ app.post("/register", function(request, response) {
   const username = request.body.username;
   const password1 = request.body.password1;
   const password2 = request.body.password2;
-  const query = "INSERT INTO User (username, password) VALUES (" + username + ", " + password1 + ")"
+  const query = "INSERT INTO User (username, password) VALUES (" + username + ", " + password1 + ");"
   
   if (password1 == password2) {
     db.all(query, function(err, user) {
       console.log("New User Registered!");
-      response.sendFile(__dirname + "/src/pages/home.html");
+      response.sendFile(__dirname + "/src/pages/login.html");
     });
     
   } else {
