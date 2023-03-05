@@ -58,14 +58,15 @@ app.get("/login", function(request, response) {
 
 app.post("/login", function(request, response) {
   const username = request.body.username;
+  const password = request.body.password;
   const query = "SELECT * FROM User WHERE User.username = " + username + ";"
   
   db.all(query, function(err, user) {
-    if(user == undefined){
+    if (user == undefined) {
       console.log("User Not Found");
       response.sendFile(__dirname + "/src/pages/login.html");
       
-    } else if (user.password == request.body.password) {
+    } else if (user.password == password) {
       console.log("Login Successful!");
       response.sendFile(__dirname + "/src/pages/home.html");
       
@@ -86,7 +87,18 @@ app.get("/register", function(request, response) {
 });
 
 app.post("/register", function(request, response) {
+  const username = request.body.username;
+  const password1 = request.body.password1;
+  const password2 = request.body.password2;
+  const query = "INSERT INTO User (username, password) VALUES (" + username + ", " + password1 + ");"
   
+  if (password1 == password2) {
+    
+    
+  } else {
+    console.log("Passwords Don't Match");
+    response.sendFile(__dirname + "/src/pages/register.html");
+  }
 });
 
 

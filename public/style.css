@@ -29,7 +29,7 @@ button {
   cursor: pointer;
   width: 10%
 }
-input[type=username], input[type=password] , input[type=email] {
+input[type=username], input[type=password1] , input[type=password2] {
   width: 50%;
   padding: 12px 20px;
   margin: 8px 0;
