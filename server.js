@@ -28,7 +28,6 @@ db.serialize(function() {
     db.run("CREATE TABLE IF NOT EXISTS SavedRecipe(recipeID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, recipeName TEXT NOT NULL, recipeIngredients JSON NOT NULL);");
     db.run("CREATE TABLE IF NOT EXISTS User_SavedRecipe(userID INTEGER NOT NULL, recipeID INTEGER NOT NULL, CONSTRAINT FK_User_User_SavedRecipe FOREIGN KEY (userID) REFERENCES User(userID), CONSTRAINT FK_SavedRecipe_User_SavedRecipe FOREIGN KEY (recipeID) REFERENCES Recipe(recipeID));");
     
-    // insert default dreams
     db.serialize(function() {
       console.log("Table Insert");
       db.run(
