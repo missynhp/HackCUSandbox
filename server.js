@@ -81,19 +81,22 @@ app.post("/login", function (request, response) {
   const password = request.body.password;
   const query = 'SELECT * FROM User WHERE User.username = "' + username + '";';
   db.serialize(function () {
-    db.all(query, function (err, user) {
+    db.each(query, function (err, user) {
+      
+      console.log(user)
+      const passwordInput = user.password;
+      console.log(passwordInput)
+      
       if (user == undefined) {
         console.log("User Not Found");
         response.sendFile(__dirname + "/src/pages/login.html");
-
-        console.log(db.run("SELECT * FROM User"));
-      } else if (JSON.stringify(user.password) == password) {
+        
+      } else if (passwordInput == password) {
         console.log("Login Successful!");
         response.sendFile(__dirname + "/src/pages/home.html");
+        
       } else {
         console.log("Incorrect Password");
-        console.log(user);
-        console.log(err);
         response.sendFile(__dirname + "/src/pages/login.html");
       }
     });
@@ -149,4 +152,7 @@ app.get("/saved-recipe", function (req, res) {
 app.get("/saved-list", function (req, res) {
   var lists =
     "SELECT listName, recipeNames, recipeIngredients FROM ShoppingList;";
+});
+app.get("/search", function (request, response) {
+    response.sendFile(__dirname + "/src/pages/search.html");
 });
