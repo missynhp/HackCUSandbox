@@ -22,12 +22,19 @@ var db = new sqlite3.Database(dbFile);
 
 // if ./.data/sqlite.db does not exist, create it, otherwise print records to console
 db.serialize(function() {
-  if (!exists) {
     console.log("Table Creation");
+    db.run('DROP TABLE IF EXISTS User');
+    db.run('DROP TABLE IF EXISTS SavedRecipe');
+    db.run('DROP TABLE IF EXISTS User_SavedRecipe');
     db.run('CREATE TABLE IF NOT EXISTS User(userID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, username TEXT NOT NULL, password TEXT NOT NULL, alcoholFree BOOLEAN DEFAULT false, dairyFree BOOLEAN DEFAULT false, fishFree BOOLEAN DEFAULT false, glutenFree BOOLEAN DEFAULT false, kosher BOOLEAN DEFAULT false, peanutFree BOOLEAN DEFAULT false, soyFree BOOLEAN DEFAULT false, treeNutFree BOOLEAN DEFAULT false, vegan BOOLEAN DEFAULT false, vegetarian BOOLEAN DEFAULT false)');
     db.run('CREATE TABLE IF NOT EXISTS SavedRecipe(recipeID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, recipeName TEXT NOT NULL, recipeIngredients JSON NOT NULL);');
     db.run('CREATE TABLE IF NOT EXISTS User_SavedRecipe(userID INTEGER NOT NULL, recipeID INTEGER NOT NULL, CONSTRAINT FK_User_User_SavedRecipe FOREIGN KEY (userID) REFERENCES User(userID), CONSTRAINT FK_SavedRecipe_User_SavedRecipe FOREIGN KEY (recipeID) REFERENCES Recipe(recipeID));');
-    
+    db.run('INSERT INTO User (username, password) VALUES ("Admin", "Admin");');
+  db.each("SELECT * from User", function(err, row) {
+    if(row){
+      console.log(row);
+    }
+  });
     // db.serialize(function() {
     //   console.log("Table Insert");
     //   // db.run(
@@ -43,14 +50,15 @@ db.serialize(function() {
       //}
     //});
   //}
-  }else{
-    // db.run('DROP TABLE IF EXISTS User;');
-    // db.run('DROP TABLE IF EXISTS SavedRecipe;');
-    // db.run('DROP TABLE IF EXISTS User_SavedRecipe;');
-    db.run('CREATE TABLE IF NOT EXISTS User(userID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, username TEXT NOT NULL, password TEXT NOT NULL, alcoholFree BOOLEAN DEFAULT false, dairyFree BOOLEAN DEFAULT false, fishFree BOOLEAN DEFAULT false, glutenFree BOOLEAN DEFAULT false, kosher BOOLEAN DEFAULT false, peanutFree BOOLEAN DEFAULT false, soyFree BOOLEAN DEFAULT false, treeNutFree BOOLEAN DEFAULT false, vegan BOOLEAN DEFAULT false, vegetarian BOOLEAN DEFAULT false)');
-    db.run('CREATE TABLE IF NOT EXISTS SavedRecipe(recipeID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, recipeName TEXT NOT NULL, recipeIngredients JSON NOT NULL);');
-    db.run('CREATE TABLE IF NOT EXISTS User_SavedRecipe(userID INTEGER NOT NULL, recipeID INTEGER NOT NULL, CONSTRAINT FK_User_User_SavedRecipe FOREIGN KEY (userID) REFERENCES User(userID), CONSTRAINT FK_SavedRecipe_User_SavedRecipe FOREIGN KEY (recipeID) REFERENCES Recipe(recipeID));');
-  }
+  // }
+  //            else{
+  //   // db.run('DROP TABLE IF EXISTS User;');
+  //   // db.run('DROP TABLE IF EXISTS SavedRecipe;');
+  //   // db.run('DROP TABLE IF EXISTS User_SavedRecipe;');
+  //   db.run('CREATE TABLE IF NOT EXISTS User(userID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, username TEXT NOT NULL, password TEXT NOT NULL, alcoholFree BOOLEAN DEFAULT false, dairyFree BOOLEAN DEFAULT false, fishFree BOOLEAN DEFAULT false, glutenFree BOOLEAN DEFAULT false, kosher BOOLEAN DEFAULT false, peanutFree BOOLEAN DEFAULT false, soyFree BOOLEAN DEFAULT false, treeNutFree BOOLEAN DEFAULT false, vegan BOOLEAN DEFAULT false, vegetarian BOOLEAN DEFAULT false)');
+  //   db.run('CREATE TABLE IF NOT EXISTS SavedRecipe(recipeID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, recipeName TEXT NOT NULL, recipeIngredients JSON NOT NULL);');
+  //   db.run('CREATE TABLE IF NOT EXISTS User_SavedRecipe(userID INTEGER NOT NULL, recipeID INTEGER NOT NULL, CONSTRAINT FK_User_User_SavedRecipe FOREIGN KEY (userID) REFERENCES User(userID), CONSTRAINT FK_SavedRecipe_User_SavedRecipe FOREIGN KEY (recipeID) REFERENCES Recipe(recipeID));');
+  // }
 });
 
 
